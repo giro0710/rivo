@@ -10,8 +10,8 @@ let app = express();
 
 // var user = require('./components/user');
 
-app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
 const mainMenu = {
 	"persistent_menu": [
@@ -428,7 +428,8 @@ app.post('/webhook', (req, res) => {
 
 			// checkUserData(sender_psid);
 			senderAction(sender_psid, "mark_seen");
-			console.log(webhook_event.postback);
+
+			console.log(webhook_event);
 
 			if (webhook_event.message) {
 				handleMessage(sender_psid, webhook_event.message);
