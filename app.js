@@ -171,12 +171,12 @@ var handleMessage = (sender_psid, received_message) => {
 				{
 					"content_type": "text",
 					"title": "Proceed",
-					"payload": "MENU_CONTACT_MASTER"
+					"payload": "CONTACT_MASTER"
 				},
 				{
 					"content_type": "text",
 					"title": "See Packages",
-					"payload": "MENU_SEE_PACKAGES"
+					"payload": "SEE_PACKAGES"
 				}
 			]
 		};
@@ -223,6 +223,8 @@ var handlePostback = (sender_psid, received_postback) => {
 		}
 	} else if (payload === "MENU_SEE_PACKAGES") {
 		response = packagesCarousel;
+	} else if (payload === "SEE_PACKAGES") {
+		response = packagesCarousel;
 	} else if (payload === "PACKAGE_PREMIUM") {
 		senderAction(sender_psid, "typing_on");
 		let temp;
@@ -251,12 +253,12 @@ var handlePostback = (sender_psid, received_postback) => {
 				{
 					"content_type": "text",
 					"title": "BUY",
-					"payload": "MENU_CONTACT_MASTER"
+					"payload": "CONTACT_MASTER"
 				},
 				{
 					"content_type": "text",
 					"title": "BACK",
-					"payload": "MENU_SEE_PACKAGES"
+					"payload": "SEE_PACKAGES"
 				}
 			]
 		};
@@ -284,12 +286,12 @@ var handlePostback = (sender_psid, received_postback) => {
 				{
 					"content_type": "text",
 					"title": "BUY",
-					"payload": "MENU_CONTACT_MASTER"
+					"payload": "CONTACT_MASTER"
 				},
 				{
 					"content_type": "text",
 					"title": "BACK",
-					"payload": "MENU_SEE_PACKAGES"
+					"payload": "SEE_PACKAGES"
 				}
 			]
 		};
@@ -314,16 +316,29 @@ var handlePostback = (sender_psid, received_postback) => {
 				{
 					"content_type": "text",
 					"title": "BUY",
-					"payload": "MENU_CONTACT_MASTER"
+					"payload": "CONTACT_MASTER"
 				},
 				{
 					"content_type": "text",
 					"title": "BACK",
-					"payload": "MENU_SEE_PACKAGES"
+					"payload": "SEE_PACKAGES"
 				}
 			]
 		};
 	} else if (payload === "MENU_CONTACT_MASTER") {
+		senderAction(sender_psid, "typing_on");
+		let temp;
+
+		temp = "Contact my Master at:\n";
+		temp += "- Facebook: https://www.facebook.com/ghianrhoi\n";
+		temp += "- Email: girocalvario@gmail.com\n";
+		temp += "- Fiverr: https://www.fiverr.com/giro0710\n\n";
+		temp += "Thank you!";
+
+		response = {
+			"text": temp
+		};
+	} else if (payload === "CONTACT_MASTER") {
 		senderAction(sender_psid, "typing_on");
 		let temp;
 
@@ -353,7 +368,7 @@ var handlePostback = (sender_psid, received_postback) => {
 				{
 					"content_type": "text",
 					"title": "See Packages",
-					"payload": "MENU_SEE_PACKAGES"
+					"payload": "SEE_PACKAGES"
 				}
 			]
 		};
