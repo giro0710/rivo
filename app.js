@@ -441,16 +441,15 @@ app.post('/webhook', (req, res) => {
 			// checkUserData(sender_psid);
 			senderAction(sender_psid, "mark_seen");
 
-			console.log(webhook_event);
-
-			// if (webhook_event.message) {
-			// 	handleMessage(sender_psid, webhook_event.message);
-			// }
-
-			if (webhook_event.postback) {
+			if (webhook_event.message) {
+				// handleMessage(sender_psid, webhook_event.message);
+				if (webhook_event.message[0].quick_reply) {
+					console.log("QP: " + webhook_event);
+					handleQuickReply(sender_psid, webhook_event.message[0].quick_reply);
+				}
+			} else if (webhook_event.postback) {
+				console.log("PB: " + webhook_event);
 				handlePostback(sender_psid, webhook_event.postback);
-			} else if (webhook_event.quick_reply) {
-				handleQuickReply(sender_psid, webhook_event.quick_reply);
 			}
 
 		})
