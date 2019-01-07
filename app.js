@@ -151,54 +151,8 @@ var callSendAPI = (sender_psid, response) => {
 var handleMessage = (sender_psid, received_message) => {
 	let response;
 
-	if (received_message.text === "I Agree.") {
+	if (received_message.text === "") {
 		senderAction(sender_psid, "typing_on");
-		response = packagesCarousel;
-	} else if (received_message.text === "BUY"){
-		senderAction(sender_psid, "typing_on");
-		let temp;
-
-		temp = "TERMS AND AGREEMENT\n\n";
-		temp += "We will give you free consultation and exchange of ideas so we can build the best for your business. ";
-		temp += "After the discussion, my master will send to you the development document based of what we agreed which includes timeline, design and feature. ";
-		temp += "We're always willing to help and assist you in terms of Facebook approval so we can launch it the soonest. ";
-		temp += "Fifty percent (50%) down payment for the start of the development, twenty five percent (25%) when the development is finished and twenty five percent (25%) after successful launch of the Messenger BOT.\n\n";
-		temp += "Thank you!";
-
-		response = {
-			"text": temp,
-			"quick_replies": [
-				{
-					"content_type": "text",
-					"title": "Proceed",
-					"payload": "MENU_CONTACT_MASTER"
-				},
-				{
-					"content_type": "text",
-					"title": "See Packages",
-					"payload": "MENU_SEE_PACKAGES"
-				}
-			]
-		};
-	} else if (received_message.text === "BACK") {
-		senderAction(sender_psid, "typing_on");
-		response = packagesCarousel;
-	} else if (received_message.text === "Proceed"){
-		senderAction(sender_psid, "typing_on");
-		let temp;
-
-		temp = "Contact my Master at:\n";
-		temp += "- Facebook: https://www.facebook.com/ghianrhoi\n";
-		temp += "- Email: girocalvario@gmail.com\n";
-		temp += "- Fiverr: https://www.fiverr.com/giro0710\n\n";
-		temp += "Thank you!";
-
-		response = {
-			"text": temp
-		};
-	} else if (received_message.text === "See Packages") {
-		senderAction(sender_psid, "typing_on");
-		response = packagesCarousel;
 	}
 
 	callSendAPI(sender_psid, response);
@@ -217,7 +171,7 @@ var handlePostback = (sender_psid, received_postback) => {
 				{
 					"content_type": "text",
 					"title": "I Agree.",
-					"payload": "USER_AGREE"
+					"payload": "QP_USER_AGREE"
 				}
 			]
 		}
@@ -251,12 +205,12 @@ var handlePostback = (sender_psid, received_postback) => {
 				{
 					"content_type": "text",
 					"title": "BUY",
-					"payload": "MENU_CONTACT_MASTER"
+					"payload": "QP_PROCEED"
 				},
 				{
 					"content_type": "text",
 					"title": "BACK",
-					"payload": "MENU_SEE_PACKAGES"
+					"payload": "QP_SEE_PACKAGES"
 				}
 			]
 		};
@@ -284,12 +238,12 @@ var handlePostback = (sender_psid, received_postback) => {
 				{
 					"content_type": "text",
 					"title": "BUY",
-					"payload": "MENU_CONTACT_MASTER"
+					"payload": "QP_PROCEED"
 				},
 				{
 					"content_type": "text",
 					"title": "BACK",
-					"payload": "MENU_SEE_PACKAGES"
+					"payload": "QP_SEE_PACKAGES"
 				}
 			]
 		};
@@ -314,12 +268,12 @@ var handlePostback = (sender_psid, received_postback) => {
 				{
 					"content_type": "text",
 					"title": "BUY",
-					"payload": "MENU_CONTACT_MASTER"
+					"payload": "QP_PROCEED"
 				},
 				{
 					"content_type": "text",
 					"title": "BACK",
-					"payload": "MENU_SEE_PACKAGES"
+					"payload": "QP_SEE_PACKAGES"
 				}
 			]
 		};
@@ -353,10 +307,68 @@ var handlePostback = (sender_psid, received_postback) => {
 				{
 					"content_type": "text",
 					"title": "See Packages",
-					"payload": "MENU_SEE_PACKAGES"
+					"payload": "QP_SEE_PACKAGES"
 				}
 			]
 		};
+	}
+
+	callSendAPI(sender_psid, response);
+}
+
+var handleQuickReply = (sender_psid, received_postback) => {
+	let response;
+  
+	let payload = received_postback.payload;
+
+	if (payload === "QP_USER_AGREE") {
+		senderAction(sender_psid, "typing_on");
+		response = packagesCarousel;
+	} else if (payload === "QP_BUY"){
+		senderAction(sender_psid, "typing_on");
+		let temp;
+
+		temp = "TERMS AND AGREEMENT\n\n";
+		temp += "We will give you free consultation and exchange of ideas so we can build the best for your business. ";
+		temp += "After the discussion, my master will send to you the development document based of what we agreed which includes timeline, design and feature. ";
+		temp += "We're always willing to help and assist you in terms of Facebook approval so we can launch it the soonest. ";
+		temp += "Fifty percent (50%) down payment for the start of the development, twenty five percent (25%) when the development is finished and twenty five percent (25%) after successful launch of the Messenger BOT.\n\n";
+		temp += "Thank you!";
+
+		response = {
+			"text": temp,
+			"quick_replies": [
+				{
+					"content_type": "text",
+					"title": "Proceed",
+					"payload": "QP_PROCEED"
+				},
+				{
+					"content_type": "text",
+					"title": "See Packages",
+					"payload": "QP_SEE_PACKAGES"
+				}
+			]
+		};
+	} else if (payload === "QP_BACK") {
+		senderAction(sender_psid, "typing_on");
+		response = packagesCarousel;
+	} else if (payload === "QP_PROCEED"){
+		senderAction(sender_psid, "typing_on");
+		let temp;
+
+		temp = "Contact my Master at:\n";
+		temp += "- Facebook: https://www.facebook.com/ghianrhoi\n";
+		temp += "- Email: girocalvario@gmail.com\n";
+		temp += "- Fiverr: https://www.fiverr.com/giro0710\n\n";
+		temp += "Thank you!";
+
+		response = {
+			"text": temp
+		};
+	} else if (payload === "QP_SEE_PACKAGES") {
+		senderAction(sender_psid, "typing_on");
+		response = packagesCarousel;
 	}
 
 	callSendAPI(sender_psid, response);
@@ -431,10 +443,14 @@ app.post('/webhook', (req, res) => {
 
 			console.log(webhook_event);
 
-			if (webhook_event.message) {
-				handleMessage(sender_psid, webhook_event.message);
-			} else if (webhook_event.postback) {
+			// if (webhook_event.message) {
+			// 	handleMessage(sender_psid, webhook_event.message);
+			// }
+
+			if (webhook_event.postback) {
 				handlePostback(sender_psid, webhook_event.postback);
+			} else if (webhook_event.quick_reply) {
+				handleQuickReply(sender_psid, webhook_event.quick_reply);
 			}
 
 		})
