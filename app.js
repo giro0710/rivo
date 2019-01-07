@@ -205,7 +205,7 @@ var handlePostback = (sender_psid, received_postback) => {
 				{
 					"content_type": "text",
 					"title": "BUY",
-					"payload": "QP_PROCEED"
+					"payload": "QP_BUY"
 				},
 				{
 					"content_type": "text",
@@ -238,7 +238,7 @@ var handlePostback = (sender_psid, received_postback) => {
 				{
 					"content_type": "text",
 					"title": "BUY",
-					"payload": "QP_PROCEED"
+					"payload": "QP_BUY"
 				},
 				{
 					"content_type": "text",
@@ -268,7 +268,7 @@ var handlePostback = (sender_psid, received_postback) => {
 				{
 					"content_type": "text",
 					"title": "BUY",
-					"payload": "QP_PROCEED"
+					"payload": "QP_BUY"
 				},
 				{
 					"content_type": "text",
@@ -444,11 +444,9 @@ app.post('/webhook', (req, res) => {
 			if (webhook_event.message) {
 				// handleMessage(sender_psid, webhook_event.message);
 				if (webhook_event.message.quick_reply) {
-					console.log("QP: " + webhook_event);
 					handleQuickReply(sender_psid, webhook_event.message.quick_reply);
 				}
 			} else if (webhook_event.postback) {
-				console.log("PB: " + webhook_event);
 				handlePostback(sender_psid, webhook_event.postback);
 			}
 
