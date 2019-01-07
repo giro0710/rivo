@@ -443,9 +443,9 @@ app.post('/webhook', (req, res) => {
 
 			if (webhook_event.message) {
 				// handleMessage(sender_psid, webhook_event.message);
-				if (webhook_event.message[0].quick_reply) {
+				if (webhook_event.message.quick_reply) {
 					console.log("QP: " + webhook_event);
-					handleQuickReply(sender_psid, webhook_event.message[0].quick_reply);
+					handleQuickReply(sender_psid, webhook_event.message.quick_reply);
 				}
 			} else if (webhook_event.postback) {
 				console.log("PB: " + webhook_event);
