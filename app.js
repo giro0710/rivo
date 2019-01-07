@@ -397,8 +397,8 @@ var getStarted = () => {
 		"json": menu
 	}, (err, res, body) => {
 		if (!err) {
-			console.log("Get started button successfully created.");
 			persistentMenu();
+			console.log("Get started button successfully created.");
 		} else {
 			console.log("Unable to create get started button");
 		}
